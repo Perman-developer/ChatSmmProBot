@@ -85,19 +85,27 @@ async def add_category2(message: Message, state: FSMContext):
 # ========================================================================================
 @admin_router.callback_query(F.data.startswith("add_service:"))
 async def add_service1(callback: CallbackQuery, state: FSMContext):
-     try:
-          await state.clear()
-          await callback.message.delete()
-          platform_id, category_id = callback.data.split(":")[1:]
-          await state.update_data(platform_id=platform_id, category_id=category_id)
-          kb = await API_ID_KEYBOARD()
-          text = "📋 Xizmat APIsini tanlang:\n"
-          for key, value in _config["api"].items():
-               text += f"{key}. - {value['url']}\n"
-          await callback.message.answer(text, reply_markup=kb)
-          await callback.answer()
-     except Exception as e:
-          await send_error(e)
+    try:
+        await state.clear()
+        await callback.message.delete()
+
+        data = callback.data.split(":")
+        if len(data) < 3:
+            await callback.answer("❌ Callback noto‘g‘ri formatda!", show_alert=True)
+            return
+
+        _, platform_id, category_id = data
+        await state.update_data(platform_id=platform_id, category_id=category_id)
+
+        kb = await API_ID_KEYBOARD()
+        text = "📋 Xizmat APIsini tanlang:\n"
+        for key, value in _config["api"].items():
+            text += f"{key}. - {value['url']}\n"
+
+        await callback.message.answer(text, reply_markup=kb)
+        await callback.answer()
+    except Exception as e:
+        await send_error(e)
 
 @admin_router.callback_query(F.data.startswith("api_id:"))
 async def add_service2(callback: CallbackQuery, state: FSMContext):
