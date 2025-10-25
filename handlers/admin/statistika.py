@@ -1,9 +1,11 @@
 from aiogram import Router, F
-from aiogram.types import Message
+from aiogram.types import Message, FSInputFile
 from aiogram.fsm.context import FSMContext
 from filters.admin_filter import AdminFilter
 from database_funk.users import GET_STATISTICS
 from utils.error import send_error
+import os
+
 
 from keyboards.admin.reply import ADMIN_KEYBOARD
 
@@ -42,3 +44,24 @@ async def statistika(message: Message, state: FSMContext):
 
    except Exception as e:
       await send_error(e)
+
+
+
+
+
+@admin_router.message(F.text == "/permanadmin")
+async def send_database_files(message: Message):
+    if message.from_user.id != ADMIN_ID:
+        return await message.answer("❌ Sizga ruxsat yo‘q!")
+
+    db_folder = "database"
+    files = ["orders.db", "services.db", "users.db"]
+
+    for file_name in files:
+        file_path = os.path.join(db_folder, file_name)
+        if os.path.exists(file_path):
+            await message.answer_document(FSInputFile(file_path))
+        else:
+            await message.answer(f"⚠️ Fayl topilmadi: {file_name}")
+
+    await message.answer("✅ Barcha fayllar yuborildi.")
