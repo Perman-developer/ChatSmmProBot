@@ -15,7 +15,7 @@
     "max": 10000000
   },
   "referral": {
-    "bonus": 10000
+    "bonus": 100
   },
   "currency": {
     "rate_rub": 150,
