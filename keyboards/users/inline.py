@@ -91,7 +91,7 @@ async def SERVICES_KEYBOARD(platform_id: int, category_id: int, ADMIN: bool = Fa
             price = CALCULATOR(api_id, float(rate), 1000)
             
         # Tugma matni
-        text = f"{service['name'][:20]} — {price} so'm"
+        text = f"{service['name'][:30]} — {price} so'm"
         builder.add(
             InlineKeyboardButton(text=text, callback_data=f"c:{service['id']}")
         )
