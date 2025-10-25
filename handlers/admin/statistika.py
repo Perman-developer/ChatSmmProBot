@@ -6,6 +6,8 @@ from database_funk.users import GET_STATISTICS
 from utils.error import send_error
 import os
 
+from config import ADMIN_ID
+
 
 from keyboards.admin.reply import ADMIN_KEYBOARD
 
