@@ -83,7 +83,7 @@ async def SERVICES_KEYBOARD(platform_id: int, category_id: int, ADMIN: bool = Fa
 
         # Narxni olish
         rate = service.get("price")
-        if rate:
+        if rate or rate == 0:
             price = float(rate)
         else:
             service_api = await LOAD_SERVICES_FROM_JSON(api_id, service_id)
