@@ -26,7 +26,7 @@ async def ADD_CATEGORY_KEYBOARD(platform_id):
 # ========================================================
 async def ADD_SERVICE_KEYBOARD(platform_id, category_id):
     builder = InlineKeyboardBuilder()
-    builder.add(InlineKeyboardButton(text="➕ Qo'shish", callback_data=f"add_service:{platform_id}{category_id}"))
+    builder.add(InlineKeyboardButton(text="➕ Qo'shish", callback_data=f"add_service:{platform_id}:{category_id}"))
     builder.adjust(1)
     return builder.as_markup()
 
