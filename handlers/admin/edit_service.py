@@ -101,6 +101,7 @@ async def edit_service3(message: Message, state: FSMContext):
         data = await state.get_data()
         id = data["id"]
         if price == 0: price = None
+        if price == 0.01: price = 0
         await UPDATE_SERVICES(id, price=price)
         await message.answer("✅ Narx muvaffaqiyatli o'zgartirildi!")
         kb = await UPDATE_SERVICE_KEYBOARD(id)
