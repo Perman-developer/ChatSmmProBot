@@ -5,6 +5,7 @@ from aiogram.fsm.state import StatesGroup, State
 
 from database_funk.users import ADD_BALL
 from utils.error import send_error
+from loader import bot
 
 admin_router = Router()
 
