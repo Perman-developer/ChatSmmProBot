@@ -43,7 +43,7 @@ async def my_balance(message: Message, state: FSMContext):
         await message.answer(
             MSG12.format(
                 user_id=user_id,
-                balance=balance,
+                balance=round(balance, 2),
                 spent_balance=spent_balance,
                 orders_count=orders_count,
                 referrals_count=referrals_count,
