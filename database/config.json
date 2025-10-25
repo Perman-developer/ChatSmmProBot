@@ -1,0 +1,48 @@
+{
+  "last_api": 3,
+  "bot": {
+    "token": "8050417005:AAFQOKjn_fLwxYBD_BsLe7MIA9R1EmRhpbg",
+    "admin_id": [7547413961],
+    "channel": {
+      "username": "ChatSmmPro",
+      "id": -1003037241828
+    }
+  },
+  "payment": {
+    "card": "9860350148113086",
+    "owner": "Shamuratov Perman",
+    "min": 1000,
+    "max": 10000000
+  },
+  "referral": {
+    "bonus": 10000
+  },
+  "currency": {
+    "rate_rub": 150,
+    "rate_usd": 12200,
+    "percent": 1.5
+  },
+  "api": {
+    "1": {
+      "url": "https://topsmm.uz/api/v2",
+      "key": "685e6bc0ce0cdcc107124c67abbb9b42"
+    },
+    "2": {
+      "url": "https://prm4u.com/api/v2",
+      "key": "40750a86d2893294616c24dfe854e36d"
+    },
+    "3": {
+      "url": "https://nicesmmpanel.com/api/v2",
+      "key": "de43cd867ae1964b6f27aa7b8c8d5370"
+    }
+  },
+  "database": {
+    "users": "database/users.db",
+    "services": "database/services.db",
+    "orders": "database/orders.db"
+  },
+  "timers": {
+    "status_update": 300,
+    "services_update": 3600
+  }
+}
