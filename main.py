@@ -16,15 +16,16 @@ logging.basicConfig(level=logging.INFO)
 
 # Routerlarni qo‘shish
 dp.include_router(start.user_router)
-dp.include_router(order.user_router)
+dp.include_router(xizmatlar.user_router)
 dp.include_router(buyurtmalarim.user_router)
 dp.include_router(my_balance.user_router)
 dp.include_router(referal.user_router)
 dp.include_router(bot_yaratish.user_router)
-dp.include_router(send_pay.user_router)
 
+dp.include_router(order.user_router)
+dp.include_router(send_pay.user_router)
 dp.include_router(support.user_router)
-dp.include_router(xizmatlar.user_router)
+
 #========================================
 dp.include_router(add_service.admin_router)
 dp.include_router(edit_service.admin_router)
