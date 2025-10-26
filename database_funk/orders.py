@@ -106,35 +106,42 @@ async def GET_ORDER_ID(ORDER_ID, API_ID):
 # ===========================================
 # 📦 Foydalanuvchining barcha buyurtmalari
 # ===========================================
+
 async def GET_USER_ORDERS(USER_ID, SUM_PRICE=False):
     try:
         async with aiosqlite.connect(ORDERS_DB) as db:
             async with db.execute("SELECT * FROM orders WHERE user_id = ?", (USER_ID,)) as cursor:
                 orders = await cursor.fetchall()
-                if orders:
-                    if SUM_PRICE:
-                        for order in orders:
-                            if order[10] == "Completed" or order[10] == "Partial":
-                                return sum(order[9] for order in orders)
-                            else:
-                                return 0
-                    return [{
-                        "id": order[0],
-                        "service_id": order[1],
-                        "order_id": order[2],
-                        "api_id": order[3],
-                        "user_id": order[4],
-                        "service_api_id": order[5],
-                        "name": order[6],
-                        "quantity": order[7],
-                        "link": order[8],
-                        "price": order[9],
-                        "status": order[10],
-                        "created_at": order[11]
-                    } for order in orders]
+
+                if not orders:
+                    return [] if not SUM_PRICE else 0
+
+                if SUM_PRICE:
+                    total = sum(
+                        order[9] for order in orders
+                        if order[10] in ("Completed", "Partial")
+                    )
+                    return total
+
+                # Aks holda barcha buyurtmalarni qaytarish
+                return [{
+                    "id": order[0],
+                    "service_id": order[1],
+                    "order_id": order[2],
+                    "api_id": order[3],
+                    "user_id": order[4],
+                    "service_api_id": order[5],
+                    "name": order[6],
+                    "quantity": order[7],
+                    "link": order[8],
+                    "price": order[9],
+                    "status": order[10],
+                    "created_at": order[11]
+                } for order in orders]
+
     except Exception as e:
         await send_error(e)
-
+        return [] if not SUM_PRICE else 0
 # ===========================================
 # ♻️ Buyurtma holatini yangilash
 # ===========================================
