@@ -202,7 +202,7 @@ async def UPDATE_ORDERS_STATUS():
             elif STATUS["status"] == "Completed":
                 await bot.send_message(
                     user_id,
-                    MSG10.format(order_id=ID, link=link, quantity=quantity)
+                    MSG10.format(order_id=ID, link=link, quantity=quantity), disable_web_page_preview=True
                 )
 
     except Exception as e:
