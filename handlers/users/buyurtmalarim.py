@@ -16,28 +16,35 @@ user_router = Router()
 
 @user_router.message(F.text == "🔍 Buyurtmalarim")
 async def buyurtmalarim(message: Message, state: FSMContext):
-   await state.clear()
-   user_id = message.from_user.id
-   orders = await GET_USER_ORDERS(user_id)
-   if not orders:
-       await message.answer("<b>❗️ Sizda buyurtmalar mavjud emas.</b>", parse_mode="HTML")
-       return
-   kb = await ORDERS_KEYBOARD(user_id)
-   await message.answer("<b>📊 Buyurtmalaringiz royxati  ....   </b>", parse_mode="HTML", reply_markup=kb)
-
+    try:
+        await state.clear()
+        user_id = message.from_user.id
+        orders = await GET_USER_ORDERS(user_id)
+        if not orders:
+            await message.answer("<b>❗️ Sizda buyurtmalar mavjud emas.</b>", parse_mode="HTML")
+            return
+        kb = await ORDERS_KEYBOARD(user_id)
+        await message.answer("<b>📊 Buyurtmalaringiz royxati  ....   </b>", parse_mode="HTML", reply_markup=kb)
+    except Exception as e:
+        await send_error(e)  # send_error funksiyasi xatoni log qiladi
 
 
 @user_router.callback_query(F.data.startswith("ordersback"))
 async def ordersback(callback: CallbackQuery, state: FSMContext):
-    await state.clear()
-    user_id = callback.from_user.id
-    orders = await GET_USER_ORDERS(user_id)
-    if not orders:
-        await callback.message.answer("<b>❗️ Sizda buyurtmalar mavjud emas.</b>", parse_mode="HTML")
-        return
-    kb = await ORDERS_KEYBOARD(user_id)
-    await callback.message.edit_text("<b>📊 Buyurtmalar:  .....    </b>", parse_mode="HTML", reply_markup=kb)
-
+    try:
+        await state.clear()
+        user_id = callback.from_user.id
+        orders = await GET_USER_ORDERS(user_id)
+        if not orders:
+            await callback.message.answer("<b>❗️ Sizda buyurtmalar mavjud emas.</b>", parse_mode="HTML")
+            return
+        kb = await ORDERS_KEYBOARD(user_id)
+        # Telegram "message is not modified" xatosidan saqlanish
+        if callback.message.text != "<b>📊 Buyurtmalaringiz ro'yxati.....    </b>" or \
+           callback.message.reply_markup != kb:
+            await callback.message.edit_text("<b>📊 Buyurtmalar:  .....    </b>", parse_mode="HTML", reply_markup=kb)
+    except Exception as e:
+        await send_error(e)
  #========================================================
 # 🔹 BUYURTMALARIM SAHIFALASH
 #========================================================
