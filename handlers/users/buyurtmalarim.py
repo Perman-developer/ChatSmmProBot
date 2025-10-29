@@ -42,7 +42,7 @@ async def ordersback(callback: CallbackQuery, state: FSMContext):
         # Telegram "message is not modified" xatosidan saqlanish
         if callback.message.text != "<b>📊 Buyurtmalaringiz ro'yxati.....    </b>" or \
            callback.message.reply_markup != kb:
-            await callback.message.edit_text("<b>📊 Buyurtmalar:  .....    </b>", parse_mode="HTML", reply_markup=kb)
+            await callback.message.edit_text("<b>📊 Buyurtmalaringiz royxati.....    </b>", parse_mode="HTML", reply_markup=kb)
     except Exception as e:
         await send_error(e)
  #========================================================
