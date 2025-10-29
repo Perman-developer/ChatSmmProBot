@@ -72,7 +72,7 @@ async def bot_start_ref(message: Message, state: FSMContext):
 # oddiy /start yoki “Orqaga”
 #========================================================================================
 @user_router.message(CommandStart())
-@user_router.message(F.text == "Orqaga")
+@user_router.message(F.text == "⬅️ Orqaga")
 async def bot_start(message: Message, state: FSMContext):
     try:
         await state.clear()
