@@ -202,7 +202,7 @@ async def UPDATE_ORDERS_STATUS():
             if STATUS["status"] == "Canceled":
                 await bot.send_message(
                     user_id,
-                    MSG11.format(order_id=ID, link=link, quantity=quantity, paid_amount=price)
+                    MSG11.format(order_id=ID, link=link, quantity=quantity, paid_amount=price), disable_web_page_preview=True
                 )
                 await ADD_BALL(user_id, price)
 
