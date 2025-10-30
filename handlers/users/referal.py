@@ -9,7 +9,7 @@ from config import ref_bonus
 
 user_router = Router()
 
-@user_router.message(F.text == "👥Referral")
+@user_router.message(F.text == "💸 Pul ishlash")
 async def referal(message: Message, state: FSMContext):
    await state.clear()
   
