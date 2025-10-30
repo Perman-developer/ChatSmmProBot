@@ -25,6 +25,15 @@ async def send_pay(message: Message, state: FSMContext):
    except Exception as e:
       await send_error(e)
 
+@user_router.callback_query(F.data == "back_payment")
+async def send_pay(callback: CallbackQuery, state: FSMContext):
+    try:
+        await state.clear()
+        kb = await PAYMENT_KEYBOARD()
+        await callback.message.answer(MSG15, reply_markup=kb)
+    except Exception as e:
+        await send_error(e)
+
 #========================================================================================
 @user_router.callback_query(F.data.startswith("pay:"))
 async def pay_callback(callback: CallbackQuery, state: FSMContext):
