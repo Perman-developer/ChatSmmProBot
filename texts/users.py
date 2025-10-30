@@ -56,17 +56,18 @@ MSG12 = """<b>🆔 ID raqamingiz: <code>{user_id}</code>
 
 🕦Hozirgi vaqt: {current_time}</b>"""
 
-MSG13 = """<b>⚡️ Biz bilan ijtimoiy sahifangizni oson rivojlantiring
- 
-👤 Bizda barcha tarmoq uchun obunachilar
-💬 Izohlar, ❤️ Yoqtirishlar, 👀Ko'rishlar 
-🗂 Bizda barcha xizmatlar mavjud
-🚀 Bundan tashqari Yuqori tezlikdagi xizmatlar
-🔐 100% maxfiy va xavfsiz to'lov turlari
+MSG13 = """<b>
+👇 Sizning referal havolangiz:
 
-👇🏻 Hoziroq bizning botimizga qo'shiling
+🔗 <code>{reflink}</code>
+<blockquote>
+‼️ Eslatma: Siz taklif qilgan do‘stingiz botga start bosib, bot bergan kanalga obuna bo‘lmasa sizga pul berilmaydi!
 
-{reflink}</b>"""
+⚠️ Soxta profillarni taklif qilish yoki yolg‘on reklama orqali foydalanuvchilar yig‘ish bloklanishingizga sabab bo‘lishi mumkin!
+</blockquote>
+
+✅ Har bir taklif qilgan do‘stingiz uchun sizga {ref_bonus} so‘m beriladi. ✅
+</b>"""
 
 MSG14 = """<b>👆🏻 Yuqoridagi banner orqali siz do'stlaringizni osongina botga taklif eta olasiz
  
