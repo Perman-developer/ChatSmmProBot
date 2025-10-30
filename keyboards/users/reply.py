@@ -9,7 +9,7 @@ async def MENU(ADMIN=False):
     builder.add(KeyboardButton(text="👤Mening hisobim"))
     builder.add(KeyboardButton(text="🔍 Buyurtmalarim"))
     builder.add(KeyboardButton(text="💰Hisob toʻldirish"))
-    builder.add(KeyboardButton(text="👥Referral"))
+    builder.add(KeyboardButton(text="💸 Pul ishlash"))
     builder.add(KeyboardButton(text="🤖 Bot yaratish"))
     builder.add(KeyboardButton(text="☎️ Qo'llab-quvvatlash"))
     if ADMIN:
