@@ -4,6 +4,7 @@ from aiogram.fsm.context import FSMContext
 #============================================================================================
 from texts.users import MSG13
 from loader import bot
+from config import ref_bonus
 
 
 user_router = Router()
@@ -16,6 +17,6 @@ async def referal(message: Message, state: FSMContext):
    bot_data = await bot.get_me()
    bot_name = bot_data.username
    reflink = f"https://t.me/{bot_name}?start={user_id}"
-   await message.answer(MSG13.format(reflink=reflink), disable_web_page_preview=True)
+   await message.answer(MSG13.format(reflink=reflink, ref_bonus=ref_bonus), disable_web_page_preview=True)
    
    
