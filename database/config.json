@@ -34,6 +34,10 @@
     "3": {
       "url": "https://nicesmmpanel.com/api/v2",
       "key": "de43cd867ae1964b6f27aa7b8c8d5370"
+    },
+    "4": {
+      "url": "https://68f2121d164c1.xvest2.ru/api/v2",
+      "key": "18d1d77d9fbf339b2a85a6a0e279c881"
     }
   },
   "database": {
