@@ -30,7 +30,7 @@ async def send_pay(callback: CallbackQuery, state: FSMContext):
     try:
         await state.clear()
         kb = await PAYMENT_KEYBOARD()
-        await callback.message.answer(MSG15, reply_markup=kb)
+        await callback.message.edit_text(MSG15, reply_markup=kb)
     except Exception as e:
         await send_error(e)
 
