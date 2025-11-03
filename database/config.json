@@ -1,7 +1,7 @@
 {
   "last_api": 3,
   "bot": {
-    "token": "8050417005:AAGBevpg8f52JDuYVWAeQ8Yi8HGAEARhJeA",
+    "token": "8050417005:AAGBevpg8f52JDuYAeQ8Yi8HGAEARhJeA",
     "admin_id": [7547413961],
     "channel": {
       "username": "ChatSmmPro",
@@ -25,19 +25,19 @@
   "api": {
     "1": {
       "url": "https://topsmm.uz/api/v2",
-      "key": "00d3cd60398253527b89ea2a2809ae74"
+      "key": "00d3cd60398253527b892a2809ae74"
     },
     "2": {
       "url": "https://prm4u.com/api/v2",
-      "key": "40750a86d2893294616c24dfe854e36d"
+      "key": "40750a86d2893294616c24d854e36d"
     },
     "3": {
       "url": "https://nicesmmpanel.com/api/v2",
-      "key": "de43cd867ae1964b6f27aa7b8c8d5370"
+      "key": "de43cd867ae1964b6f27aa7b8d5370"
     },
     "4": {
       "url": "https://68f2121d164c1.xvest2.ru/api/v2",
-      "key": "18d1d77d9fbf339b2a85a6a0e279c881"
+      "key": "18d1d77d9fbf339b2a85a6a279c881"
     }
   },
   "database": {
