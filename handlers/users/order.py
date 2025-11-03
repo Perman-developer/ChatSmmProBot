@@ -22,11 +22,16 @@ class OrderState(StatesGroup):
     confirm = State()
 
 
+
 @user_router.callback_query(F.data.startswith("service:"))
 async def service_handler(callback: CallbackQuery, state: FSMContext):
     try:
         await state.clear()
-        await callback.message.delete()
+        try:
+            await callback.message.delete()
+        except TelegramBadRequest:
+            pass  # Xabarni o‘chira olmasa ham davom etamiz
+
         id = int(callback.data.split(":")[1])
         service = await GET_SERVICE(id)
         if not service:
@@ -41,9 +46,13 @@ async def service_handler(callback: CallbackQuery, state: FSMContext):
                 max_amount = api_data.get("max", 0)
 
         await state.update_data(min=min_amount, max=max_amount, id=id)
-        await callback.message.answer(MSG6.format(min=min_amount, max=max_amount), reply_markup=back)        
+        await callback.message.answer(
+            MSG6.format(min=min_amount, max=max_amount),
+            reply_markup=back
+        )
         await state.set_state(OrderState.quantity)
         await callback.answer()
+
     except Exception as e:
         await send_error(e)
 
