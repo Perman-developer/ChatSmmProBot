@@ -29,7 +29,7 @@ async def service_handler(callback: CallbackQuery, state: FSMContext):
         await state.clear()
         try:
             await callback.message.delete()
-        except TelegramBadRequest:
+        except:
             pass  # Xabarni o‘chira olmasa ham davom etamiz
 
         id = int(callback.data.split(":")[1])
