@@ -108,36 +108,25 @@ async def SAVE_SERVICES_TO_JSON(api_id):
 # SERVICES JSON O‘QISH (to‘liq yoki bitta xizmat)
 # ==========================================================
 async def LOAD_SERVICES_FROM_JSON(api_id: int, service_id: int = None):
-    """
-    services_{api_id}.json fayldan xizmat(lar)ni o‘qib qaytaradi
-    - Agar service_id berilmasa → butun ro‘yxatni qaytaradi
-    - Agar service_id berilsa → faqat shu xizmatni (yoki None) qaytaradi
-    """
     FILE = JSON_FILE(api_id)
-
     try:
         if not FILE.exists():
-            print(f"⚠️ Fayl topilmadi: {FILE}")
             return None if service_id else []
 
-        # Faylni async o‘qish
         async with aiofiles.open(FILE, "r", encoding="utf-8") as f:
             content = await f.read()
 
-        # JSONni Python obyektga o‘tkazish
         data = json.loads(content)
 
-        # 🔹 Agar service_id so‘ralgan bo‘lsa, faqat bittasini qidiramiz
         if service_id is not None:
             service_id = int(service_id)
             for service in data:
-                if int(service.get("service", 0)) == service_id:
+                if isinstance(service, dict) and int(service.get("service", 0)) == service_id:
                     return service
-            # Topilmasa
             return None
 
-        # 🔹 Aks holda, butun ro‘yxatni qaytaramiz
-        return data
+        # Faqat dict bo‘lgan elementlarni qaytarish
+        return [s for s in data if isinstance(s, dict)]
 
     except json.JSONDecodeError:
         print(f"❌ JSON fayl buzilgan: {FILE}")
