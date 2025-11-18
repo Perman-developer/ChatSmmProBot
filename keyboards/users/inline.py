@@ -83,33 +83,38 @@ async def SERVICES_KEYBOARD(platform_id: int, category_id: int, ADMIN: bool = Fa
 
         # Narxni olish
         rate = service.get("price")
-        if rate or rate == 0:
+        if rate is not None:
             price = float(rate)
         else:
             service_api = await LOAD_SERVICES_FROM_JSON(api_id, service_id)
-            rate = service_api.get("rate")
+            # service_api None bo'lsa, rate = 0
+            rate = service_api.get("rate") if service_api else 0
             price = CALCULATOR(api_id, float(rate), 1000)
-            
+
         # Tugma matni
-        text = f"{service['name'][:30]} — {price} so'm"
+        text = f"{service.get('name', 'No Name')[:30]} — {price} so'm"
         builder.add(
-            InlineKeyboardButton(text=text, callback_data=f"c:{service['id']}")
+            InlineKeyboardButton(text=text, callback_data=f"c:{service.get('id', 0)}")
         )
 
     builder.adjust(1)
 
     if ADMIN:
         builder.row(
-            InlineKeyboardButton(text="➕ Qo'shish", callback_data=f"add_service:{platform_id}:{category_id}"),
-            InlineKeyboardButton(text="✏️ Tahrirlash", callback_data=f"edit_category:{category_id}")
+            InlineKeyboardButton(
+                text="➕ Qo'shish", callback_data=f"add_service:{platform_id}:{category_id}"
+            ),
+            InlineKeyboardButton(
+                text="✏️ Tahrirlash", callback_data=f"edit_category:{category_id}"
+            )
         ).row(
-            InlineKeyboardButton(text="❌ O'chirish", callback_data=f"delete_category:{category_id}")
+            InlineKeyboardButton(
+                text="❌ O'chirish", callback_data=f"delete_category:{category_id}"
+            )
         )
 
     builder.row(InlineKeyboardButton(text="⬅️ Orqaga", callback_data=f"back:{platform_id}"))
     return builder.as_markup()
-
-
 # ========================================================
 # 🔹 XIZMAT TANLASH TUGMALARI
 # ========================================================
