@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import os
 from loader import bot, dp
 
 # =========================
@@ -14,12 +15,15 @@ from handlers.admin import add_service, edit_service, statistika, accept_pay
 
 # =========================
 # Logging sozlamalari
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+log_file = os.path.join(BASE_DIR, "bot.log")  # foydalanuvchi papkasida log fayl
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("/root/bots/smmbot/bot.log"),  # log fayl
-        logging.StreamHandler()  # systemd journal uchun
+        logging.FileHandler(log_file),  # ~/bots/smmbot/bot.log
+        logging.StreamHandler()         # terminal yoki systemd journal
     ]
 )
 
