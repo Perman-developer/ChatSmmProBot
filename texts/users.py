@@ -77,27 +77,18 @@ MSG14 = """<b>👆🏻 Yuqoridagi banner orqali siz do'stlaringizni osongina bot
 
 MSG15 = """<b>💵To'lov turini tanlang!</b>"""
 
-MSG16 = """<b>⛔️ Hisob  karta raqami
+MSG16 = """<b>⛔ Hisob karta:</b> <code>{karta}</code>
+👤 {FIO}
 
-<code>{karta}</code>
+📆 To‘lov qiling, tekshiruvdan so‘ng 5 min ichida [💠Avto to‘ldiriladi].
 
-👤 {FIO} 
+⬇️ To‘lov summasi:
+➡ Min: {min_pay} | 🔄 Max: {max_pay}
 
+💠 Summani to‘g‘ri yozing, aks holda pullar tushmasligi mumkin.
 
-📆 Qoida amal qiling yuqoridagi kartaga to'lov qilib 
-
-🔍 To'lov qilganizdan  keyin tekshiruvlar davomida pullar bot hisobizga 5 minut ichida  [💠Avto to'ldiriladi ]
-
-⬇️ Pastagi summadan kam to'lov qilmang e'tiborli bo'ling
-
-➡️ Min: {min_pay}
-🔄 Mak: {max_pay}
-
-💠 To'lov summasini to'gri yozishni unutmang aks holda pullar tushmasligi mumkin ?
-
-📨 Izohlar bilan tanishib chiqib 
-
-✅ To'lov qildim tugmasini bosing</b>"""
+📨 Izohlarni o‘qing va
+✅ 'To‘lov qildim' tugmasini bosing.</b>"""
 
 MSG17 = """<b>💰To'lov qilingan pul miqdorini kiriting!</b>"""
 
