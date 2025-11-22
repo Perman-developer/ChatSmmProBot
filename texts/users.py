@@ -88,7 +88,7 @@ MSG16 = """<b>⛔ Hisob karta:</b> <code>{karta}</code>
 💠 Summani to‘g‘ri yozing, aks holda pullar tushmasligi mumkin.
 
 📨 Izohlarni o‘qing va
-✅ 'To‘lov qildim' tugmasini bosing.</b>"""
+✅ 'To‘lov qildim' tugmasini bosing."""
 
 MSG17 = """<b>💰To'lov qilingan pul miqdorini kiriting!</b>"""
 
