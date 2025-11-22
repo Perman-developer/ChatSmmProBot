@@ -13,6 +13,8 @@ from utils.error import send_error
 from utils.kurs_calculator import CALCULATOR
 from utils.check_link import CHECK_SOCIAL_LINK
 from texts.users import MSG6, MSG7, MSG8, MSG9, MSG30, MSG21
+from config import ADMIN_ID
+from loader import bot
 
 user_router = Router()
 
@@ -93,13 +95,13 @@ async def link_handler(message: Message, state: FSMContext):
         if not service:
             return await message.answer("Xizmat topilmadi", parse_mode="HTML")
         name = service["name"]
-        
+
 
         rate = service.get("price")
         price = rate
         if rate is None:
             api_data = await LOAD_SERVICES_FROM_JSON(service["api_id"], service["service_id"])
-            
+
             rate = api_data.get("rate")
             price = CALCULATOR(service["api_id"], float(rate), quantity)
             if rate is None:
@@ -146,11 +148,11 @@ async def confirm_handler(callback: CallbackQuery, state: FSMContext):
         if balance < price:
             await state.clear()
             return await callback.message.edit_text("❌ Hisobingizda yetarli mablag' mavjud emas")
-            
+
         order = await SEND_ORDER(api_id, service_api_id, link, quantity)
         if order.get("order"):
             order_id = order["order"]
-            
+
             await ADD_ORDER(
                 SERVICE_ID=service_id,
                 ORDER_ID=order_id,
@@ -169,9 +171,8 @@ async def confirm_handler(callback: CallbackQuery, state: FSMContext):
         else:
             await callback.answer("❌ Buyurtma berishda xatolik yuz berdi", show_alert=True)
             if "error" in order:
-                await callback.answer(order["error"], show_alert=True)
+                await bot.send_message(ADMIN_ID, order["error"])
             await state.clear()
 
     except Exception as e:
         await send_error(e)
-
