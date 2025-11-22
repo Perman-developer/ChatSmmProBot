@@ -170,7 +170,10 @@ async def confirm_handler(callback: CallbackQuery, state: FSMContext):
             await state.clear()
         else:
             await callback.answer("❌ Buyurtma berishda xatolik yuz berdi", show_alert=True)
+            
             if "error" in order:
+                if order['error'] == "You have active order with this link. Please wait until order being completed.":
+                    await callback.message.edit_text("⚠️ Ushbu havola bo‘yicha sizda allaqachon faol buyurtma mavjud.\n⏳ Iltimos, avvalgi buyurtma yakunlanishini kuting.")
                 await bot.send_message(ADMIN_ID, order["error"])
             await state.clear()
 
