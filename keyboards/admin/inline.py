@@ -45,9 +45,9 @@ async def API_ID_KEYBOARD():
 
 async def ACCEPT_PAY(user_id, amount):
    builder = InlineKeyboardBuilder()
-   builder.add(InlineKeyboardButton(text="✅ Tasdiqlash", callback_data=f"accept:{user_id}:{amount}"))
-   builder.add(InlineKeyboardButton(text="❌ Rad qilish", callback_data=f"decline:{user_id}:{amount}"))
-   builder.adjust(1)
+   builder.add(InlineKeyboardButton(text="✅", callback_data=f"accept:{user_id}:{amount}"))
+   builder.add(InlineKeyboardButton(text="❌", callback_data=f"decline:{user_id}:{amount}"))
+   builder.adjust(2)
    return builder.as_markup()
 
 # ========================================================
