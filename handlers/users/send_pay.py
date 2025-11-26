@@ -78,22 +78,33 @@ async def confirm_pay(callback: CallbackQuery, state: FSMContext):
 #========================================================================================
 @user_router.message(PayForm.amount)
 async def process_amount(message: Message, state: FSMContext):
-   try:
-      amount = message.text
-      try:
-         amount = int(amount)
-      except ValueError:
-         await message.answer("⚠️ Summa raqamda bo'lishi kerak!")
-         
-      if amount < min_pay or amount > max_pay:
-         await message.answer(f"⚠️ Summa {min_pay} dan {max_pay} gacha bo'lishi kerak!")
-         return
+    try:
+        amount = message.text
 
-      await state.update_data(amount=amount)
-      await message.answer(MSG18)
-      await state.set_state(PayForm.photo)
-   except Exception as e:
-      await send_error(e)
+        # ✅ TEXT borligini tekshir
+        if not amount:
+            await message.answer("⚠️ Summani matn ko'rinishida yuboring!")
+            return
+
+        # ✅ integerga aylantirish
+        try:
+            amount = int(amount)
+        except (ValueError, TypeError):
+            await message.answer("⚠️ Summa raqamda bo'lishi kerak!")
+            return   # ✅ MUHIM
+
+        # ✅ diapazon chek
+        if amount < min_pay or amount > max_pay:
+            await message.answer(f"⚠️ Summa {min_pay} dan {max_pay} gacha bo'lishi kerak!")
+            return
+
+        # ✅ muvaffaqiyatli
+        await state.update_data(amount=amount)
+        await message.answer(MSG18)
+        await state.set_state(PayForm.photo)
+
+    except Exception as e:
+        await send_error(e)
 
 #========================================================================================
 @user_router.message(PayForm.photo, F.photo)
