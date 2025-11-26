@@ -108,7 +108,7 @@ async def process_photo(message: Message, state: FSMContext):
       kb = await ACCEPT_PAY(user_id, amount)
 
       await bot.send_photo(
-         3322063678,
+         -1003322063678,
          photo,
          caption=f"🆔️: {user_id}\n💰 Summa: {amount}\n💳 To'lov turi: {pay_name}", reply_markup=kb
       )
