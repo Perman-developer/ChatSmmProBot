@@ -83,7 +83,7 @@ async def process_amount(message: Message, state: FSMContext):
 
         # ✅ TEXT borligini tekshir
         if not amount:
-            await message.answer("⚠️ Summani matn ko'rinishida yuboring!")
+            await message.answer("⚠️ Summani  kiriting!")
             return
 
         # ✅ integerga aylantirish
