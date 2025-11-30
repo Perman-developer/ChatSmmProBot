@@ -145,6 +145,7 @@ async def confirm_handler(callback: CallbackQuery, state: FSMContext):
         user_id = callback.from_user.id
         user = await GET_USER(user_id)
         balance = user["balance"]
+
         if balance < price:
             await state.clear()
             return await callback.message.edit_text("❌ Hisobingizda yetarli mablag' mavjud emas")
@@ -170,11 +171,27 @@ async def confirm_handler(callback: CallbackQuery, state: FSMContext):
             await state.clear()
         else:
             await callback.answer("❌ Buyurtma berishda xatolik yuz berdi", show_alert=True)
-            
+
             if "error" in order:
                 if order['error'] == "You have active order with this link. Please wait until order being completed.":
-                    await callback.message.edit_text("⚠️ Ushbu havola bo‘yicha sizda allaqachon faol buyurtma mavjud.\n⏳ Iltimos, avvalgi buyurtma yakunlanishini kuting.")
-                await bot.send_message(ADMIN_ID, order["error"])
+                    await callback.message.edit_text(
+                        "⚠️ Ushbu havola bo‘yicha sizda allaqachon faol buyurtma mavjud.\n"
+                        "⏳ Iltimos, avvalgi buyurtma yakunlanishini kuting."
+                    )
+
+                # ✅ Admin uchun to‘liq xabar
+                error_message = (
+                    f"⚠️ BUYURTMA XATOLIGI\n"
+                    f"Xizmat: {name}\n"
+                    f"Service ID: {service_id}\n"
+                    f"User: {user_id}\n"
+                    f"Link: {link}\n"
+                    f"Quantity: {quantity}\n"
+                    f"Narx: {price}\n"
+                    f"API Xato: {order['error']}"
+                )
+                await bot.send_message(ADMIN_ID, error_message)
+
             await state.clear()
 
     except Exception as e:
