@@ -18,9 +18,9 @@
     "bonus": 100
   },
   "currency": {
-    "rate_rub": 150,
+    "rate_rub": 160,
     "rate_usd": 12200,
-    "percent": 1.5
+    "percent": 1
   },
   "api": {
     "1": {
@@ -42,7 +42,7 @@
     "orders": "database/orders.db"
   },
   "timers": {
-    "status_update": 300,
+    "status_update": 60,
     "services_update": 3600
   }
 }
