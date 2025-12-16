@@ -20,7 +20,7 @@
   "currency": {
     "rate_rub": 160,
     "rate_usd": 12200,
-    "percent": 1.5
+    "percent": 1
   },
   "api": {
     "1": {
