@@ -190,7 +190,7 @@ async def confirm_handler(callback: CallbackQuery, state: FSMContext):
                     f"Narx: {price}\n"
                     f"API Xato: {order['error']}"
                 )
-                await bot.send_message(ADMIN_ID, error_message)
+                await bot.send_message(-1003588825972, error_message)
 
             await state.clear()
 
