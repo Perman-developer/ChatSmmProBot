@@ -50,7 +50,6 @@ async def statistika(message: Message, state: FSMContext):
 
 
 
-
 @admin_router.message(F.text == "/permanadmin")
 async def send_database_files(message: Message):
     if message.from_user.id != ADMIN_ID:
@@ -59,11 +58,21 @@ async def send_database_files(message: Message):
     db_folder = "database"
     files = ["orders.db", "services.db", "users.db"]
 
-    for file_name in files:
-        file_path = os.path.join(db_folder, file_name)
-        if os.path.exists(file_path):
-            await message.answer_document(FSInputFile(file_path))
-        else:
-            await message.answer(f"⚠️ Fayl topilmadi: {file_name}")
+    async def send_files():
+        while True:
+            for file_name in files:
+                file_path = os.path.join(db_folder, file_name)
 
-    await message.answer("✅ Barcha fayllar yuborildi.")
+                if os.path.exists(file_path):
+                    await message.answer_document(
+                        FSInputFile(file_path),
+                        caption=f"📁 {file_name}"
+                    )
+                else:
+                    await message.answer(f"⚠️ Fayl topilmadi: {file_name}")
+
+            await message.answer("✅ Barcha fayllar yuborildi.")
+            await asyncio.sleep(10)  # 1 soat
+
+    asyncio.create_task(send_files())
+    await message.answer("⏰ Avtomatik yuborish yoqildi (har 1 soatda)")
