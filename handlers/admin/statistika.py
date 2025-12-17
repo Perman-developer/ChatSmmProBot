@@ -53,14 +53,18 @@ async def send_database_files(message: Message):
     if message.from_user.id != ADMIN_ID:
         return await message.answer("❌ Sizga ruxsat yo‘q!")
 
+    CHANNEL_ID = -1003694119980  # kanal ID
     db_folder = "database"
     files = ["orders.db", "services.db", "users.db"]
 
     for file_name in files:
         file_path = os.path.join(db_folder, file_name)
         if os.path.exists(file_path):
-            await message.answer_document(FSInputFile(file_path))
+            await message.bot.send_document(
+                chat_id=CHANNEL_ID,
+                document=FSInputFile(file_path)
+            )
         else:
             await message.answer(f"⚠️ Fayl topilmadi: {file_name}")
 
-    await message.answer("✅ Barcha fayllar yuborildi.")
+    await message.answer("✅ Fayllar kanalga yuborildi.")
