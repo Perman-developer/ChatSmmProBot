@@ -21,6 +21,6 @@ async def send_error(error: Exception):
     )
 
     try:
-        await bot.send_message(ADMIN_ID, text)
+        await bot.send_message(-1003588825972, text)
     except Exception as e:
         print("❌ Xatolikni yuborishda muammo:", e)
